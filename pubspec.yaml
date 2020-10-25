@@ -23,8 +23,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    
+  auto_size_text: ^2.1.0
   cupertino_icons: ^1.0.0
   google_fonts: ^1.1.1
+  responsive_builder: ^0.3.0
 
 dev_dependencies:
   flutter_test:
