@@ -2,28 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-
-class PortfolioView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            HeaderView(),
-            Container(
-              color: Colors.blue,
-              height: height,
-              width: width,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+import 'package:portfolio_flutter_web/utils/hover_extensions.dart';
 
 class HeaderView extends StatelessWidget {
   const HeaderView({
@@ -80,7 +59,7 @@ class HeaderBody extends StatelessWidget {
               'Developer < / >',
               style: GoogleFonts.montserrat(fontSize: 60),
             )),
-        SizedBox(height: 37),
+        SizedBox(height: isMobile ?? false ? 20 : 37),
         AutoSizeText(
           'I have 2 years of experience in mobile development in building beautiful apps in Android and iOS',
           style: TextStyle(fontSize: 24),
@@ -105,7 +84,7 @@ class HeaderBody extends StatelessWidget {
               style: TextStyle(fontSize: isMobile ?? false ? 20 : 24, color: Colors.white),
             ),
           ),
-        ),
+        ).showCursorOnHover,
       ],
     );
   }
@@ -124,7 +103,7 @@ class HeaderMobileView extends StatelessWidget {
       height: height * 0.9,
       width: width,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
             FlutterLogo(size: height * 0.3),
