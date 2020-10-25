@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Gabor Szabo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
       home: PortfolioView(),
@@ -27,7 +28,7 @@ class PortfolioView extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: DrawerView(),
+      endDrawer: DrawerView(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -61,25 +62,38 @@ class DrawerView extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                child: Text('Drawer Header'),
+                child: Text(
+                  'Gabor Szabo',
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  gradient: LinearGradient(
+                      // colors: [Colors.white, Colors.blue],
+                      // tileMode: TileMode.repeated,
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      stops: [
+                        0.1,
+                        0.4,
+                        0.6,
+                        0.9,
+                      ],
+                      colors: [
+                        Colors.yellow,
+                        Colors.red,
+                        Colors.indigo,
+                        Colors.teal,
+                      ]),
                 ),
               ),
-              ListTile(
-                title: Text('Item 1'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title: Text('Item 2'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
+              for (var item in kNavigationItems)
+                ListTile(
+                  title: Text(item.text),
+                  onTap: () {
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
             ],
           ),
         );
