@@ -33,7 +33,7 @@ class PortfolioView extends StatelessWidget {
         child: Column(
           children: [
             NavigationBarView(),
-            HeaderView(),
+            HeaderDesktopView(),
             Container(
               color: Colors.blue,
               height: height,

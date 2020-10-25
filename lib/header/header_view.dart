@@ -1,19 +1,28 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:portfolio_flutter_web/utils/hover_extensions.dart';
 
-class HeaderView extends StatelessWidget {
-  const HeaderView({
+class HeaderDesktopView extends StatelessWidget {
+  const HeaderDesktopView({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isSmall = width < 750;
+    final imageWidth = min(width * 0.47, 400);
+
     return ResponsiveBuilder(
       builder: (_, size) {
+        // == mobile
         if (size.isMobile) return HeaderMobileView();
+
+        // == desktop
         return Container(
           height: 864, // 1080 * 0.8 -> https://www.udemy.com/course/flutter-web-create-a-responsive-sleek-developer-portfolio/learn/lecture/19909580?start=264#notes
           width: 1507, // 1980 * 0.8,
@@ -24,7 +33,11 @@ class HeaderView extends StatelessWidget {
                 Expanded(
                   child: HeaderBody(),
                 ),
-                FlutterLogo(size: 300)
+                //FlutterLogo(size: 300)
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Image.asset('images/icon_2.png', width: imageWidth),
+                )
               ],
             ),
           ),
@@ -106,8 +119,12 @@ class HeaderMobileView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
-            FlutterLogo(size: height * 0.3),
-            Spacer(),
+            Expanded(
+              child: Image.asset('images/icon_2.png', height: 350),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             HeaderBody(
               isMobile: true,
             ),
